@@ -8,8 +8,9 @@ import ProductIcon from '../components/Icons/ProductIcon';
 import { Link } from 'react-router-dom';
 import TicketIcon from '../components/Icons/TicketIcon';
 import OrderIcon from '../components/Icons/OrderIcon';
+import HeaderAdmin from '../components/layout/HeaderAdmin';
 
-const { Header, Content, Sider } = Layout;
+const { Content, Sider } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -36,7 +37,7 @@ const items: MenuItem[] = [
 const AdminLayout = () => {
    const [collapsed, setCollapsed] = useState(false);
    const ButtonTrigger = (
-      <button className='bg-greenPrimary text-white w-full font-semibold'>{collapsed ? 'Open' : 'Hide'}</button>
+      <button className='bg-greenPrimary text-white w-full font-semibold'>{collapsed ? 'Hiện' : 'Ẩn'}</button>
    );
    const {
       token: { colorBgContainer }
@@ -58,19 +59,7 @@ const AdminLayout = () => {
             <Menu theme='light' defaultSelectedKeys={['1']} mode='inline' items={items} />
          </Sider>
          <Layout>
-            <Header
-               style={{
-                  padding: 0,
-                  background: 'white',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center'
-               }}
-            >
-                 <div>
-                    
-                 </div>
-            </Header>
+            <HeaderAdmin />
             <Content style={{ margin: '0 16px' }}>
                <Breadcrumb style={{ margin: '16px 0' }}>
                   <Breadcrumb.Item>User</Breadcrumb.Item>

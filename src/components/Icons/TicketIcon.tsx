@@ -7,6 +7,8 @@ const svg = () => (
       viewBox='0 0 512 512'
       id='ticket'
       fill='currentColor'
+      width="1.2em"
+      height="1.2em"
    >
       <path
          d='M505.081,196.611c3.82,0,6.919-3.097,6.919-6.919V123.56c0-18.536-15.081-33.615-33.617-33.615H33.613
