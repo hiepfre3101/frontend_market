@@ -8,8 +8,8 @@ import { saveTokenAndUser } from '../../slices/authSlice';
 import { GoogleOutlined } from '@ant-design/icons';
 
 export interface AuthLoginInput {
-   email: string;
-   password: string;
+    email: string;
+    password: string;
 }
 
 const LoginPage = () => {
@@ -18,6 +18,7 @@ const LoginPage = () => {
    const [login, { data, isLoading, error }] = useLoginMutation();
 
    useEffect(() => {
+      console.log(error);
       if (error?.data?.message) {
          message.error(error?.data?.message);
       }
@@ -82,11 +83,7 @@ const LoginPage = () => {
                </Form.Item>
                <Form.Item style={{ textAlign: 'center' }}>
                   <p>
-                     Do not have an account?
-                     <Link className='text-blue-400' to='/signup'>
-                        {' '}
-                        Register here
-                     </Link>
+                     Do not have an account?<Link className='text-blue-400' to='/signup'> Register here</Link>
                   </p>
                </Form.Item>
             </Form>
