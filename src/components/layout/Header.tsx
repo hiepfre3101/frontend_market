@@ -6,10 +6,10 @@ import CartIcon from '../../assets/icons/CartIcon';
 import HeartIcon from '../../assets/icons/HeartIcon';
 import LeaftIcon from '../../assets/icons/LeaftIcon';
 import { useGetAllCateQuery } from '../../services/cate.service';
+import SearchFilter from '../../pages/UserPages/homepage/component/SearchFilter';
 
 const Header = () => {
    const { data, isLoading } = useGetAllCateQuery();
-   console.log(data);
 
    return (
       <div className='px-48'>
@@ -32,7 +32,9 @@ const Header = () => {
                </div>
             </div>
             <div className='w-20 flex justify-between items-center pb-3'>
-               <GlassIcon className='w-7 h-7' />
+               <SearchFilter>
+                  <GlassIcon className='w-7 h-7' />
+               </SearchFilter>
                <CartIcon className='w-7 h-7' />
             </div>
          </div>

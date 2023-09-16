@@ -1,6 +1,4 @@
-import Data from '../data';
-
-const BtnFilter = ({ btnFilter, filterItems, setItems }: any) => {
+const BtnFilter = ({ btnFilter, filterItems, refetch }: any) => {
    return (
       <div className='flex justify-center mb-10'>
          <div>
@@ -12,7 +10,7 @@ const BtnFilter = ({ btnFilter, filterItems, setItems }: any) => {
                   {data}
                </button>
             ))}
-            <button className='text-[#6AAD12] p-1 px-2 mx-5 text-lg font-bold' onClick={() => setItems(Data)}>
+            <button className='text-[#6AAD12] p-1 px-2 mx-5 text-lg font-bold' onClick={() => refetch()}>
                All
             </button>
          </div>

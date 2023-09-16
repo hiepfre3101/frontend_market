@@ -1,32 +1,40 @@
+import { IProduct } from './../interface/products';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { categories } from '../common/categories';
 
-const category = createApi({
-   reducerPath: 'category',
+const product = createApi({
+   reducerPath: 'products',
    baseQuery: fetchBaseQuery({
       baseUrl: 'http://localhost:8000/api',
       credentials: 'include'
    }),
-   tagTypes: ['category'],
+   tagTypes: ['products'],
    endpoints: (builder) => ({
-      getAllCate: builder.query<{ body: categories[] }, void>({
+      getAllProduct: builder.query<{ body: IProduct[] }, void>({
          query: () => ({
-            url: '/categories',
+            url: '/products?_expand',
             method: 'GET',
             credentials: 'include'
          }),
-         providesTags: ['category']
+         providesTags: ['products']
       }),
-      getAllCateById: builder.query({
-         query: (id) => ({
-            url: '/categories/' + id,
+      searchProduct: builder.mutation<{ body: IProduct[] }, string>({
+         query: (option) => ({
+            url: '/products?_expand' + option,
             method: 'GET',
             credentials: 'include'
          }),
-         providesTags: ['category']
+         invalidatesTags: ['products']
+      }),
+      getAllProductById: builder.query({
+         query: (id) => ({
+            url: '/products/' + id,
+            method: 'GET',
+            credentials: 'include'
+         }),
+         providesTags: ['products']
       })
    })
 });
 
-export const { useGetAllCateByIdQuery, useGetAllCateQuery } = category;
-export default category;
+export const { useGetAllProductQuery, useGetAllProductByIdQuery, useSearchProductMutation } = product;
+export default product;

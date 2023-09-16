@@ -2,8 +2,8 @@ import { Button, Form, Input, message } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useSingupMutation } from '../services/auth.service';
-import { saveTokenAndUser } from '../slices/authSlice';
+import { useSingupMutation } from '../../services/auth.service';
+import { saveTokenAndUser } from '../../slices/authSlice';
 import { GoogleOutlined } from '@ant-design/icons';
 import { RuleObject } from 'antd/es/form';
 
@@ -14,34 +14,34 @@ export interface ErrorResponse {
 }
 
 export interface DataAuthResponse {
-    accessToken: string;
-    message: string;
-    data: IUser
+   accessToken: string;
+   message: string;
+   data: IUser;
 }
 
 export interface AuthSignupInput {
-    email: string;
-    userName: string;
-    password: string;
-    avatar?: string;
-    confirmPassword: string;
+   email: string;
+   userName: string;
+   password: string;
+   avatar?: string;
+   confirmPassword: string;
 }
 
 export interface IUser {
-    userName: string;
-    email: string;
-    password: string;
-    phoneNumber?: string;
-    address?: string;
-    avatar?: string;
-    role: 'admin' | 'member';
-    carId?: string;
-    notification?: string[];
-    voucher: string[];
-    state: boolean;
+   userName: string;
+   email: string;
+   password: string;
+   phoneNumber?: string;
+   address?: string;
+   avatar?: string;
+   role: 'admin' | 'member';
+   carId?: string;
+   notification?: string[];
+   voucher: string[];
+   state: boolean;
 }
 
-const SignupPage = () => {  
+const SignupPage = () => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
    const [signup, { data, isLoading, error }] = useSingupMutation();
@@ -79,9 +79,9 @@ const SignupPage = () => {
    };
 
    return (
-      <div style={{ width: '60%', margin: '0 auto' }}>
+      <div className='m-auto w-[300px] max-w-[97%]'>
          <h3 style={{ textAlign: 'center', marginTop: '30px' }}>Register</h3>
-         <div id='formLogin' style={{ width: '50%', margin: '0 auto' }}>
+         <div id='formLogin' className='m-auto'>
             <Form layout='vertical' initialValues={{ remember: true }} onFinish={onFinish}>
                <Form.Item
                   label='Username'
@@ -124,7 +124,7 @@ const SignupPage = () => {
                      {
                         required: true,
                         message: 'Please confirm your password!'
-                     },
+                     }
                   ]}
                >
                   <Input.Password />
@@ -142,7 +142,11 @@ const SignupPage = () => {
                </Form.Item>
                <Form.Item style={{ textAlign: 'center' }}>
                   <p>
-                     Do you already have an account? <Link className='text-blue-400' to='/login'> Login here</Link>
+                     Do you already have an account?{' '}
+                     <Link className='text-blue-400' to='/login'>
+                        {' '}
+                        Login here
+                     </Link>
                   </p>
                </Form.Item>
             </Form>

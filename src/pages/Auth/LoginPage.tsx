@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useLoginMutation } from '../services/auth.service';
-import { saveTokenAndUser } from '../slices/authSlice';
+import { useLoginMutation } from '../../services/auth.service';
+import { saveTokenAndUser } from '../../slices/authSlice';
 import { GoogleOutlined } from '@ant-design/icons';
 
 export interface AuthLoginInput {
@@ -44,9 +44,9 @@ const LoginPage = () => {
       }
    };
    return (
-      <div style={{ width: '60%', margin: '0 auto' }}>
+      <div className='m-auto w-[300px] max-w-[97%]'>
          <h3 style={{ textAlign: 'center', marginTop: '30px' }}>Login</h3>
-         <div id='formLogin' style={{ width: '50%', margin: '0 auto' }}>
+         <div id='formLogin' className='m-auto'>
             <Form layout='vertical' initialValues={{ remember: true }} onFinish={onFinish}>
                <Form.Item
                   label='Email'

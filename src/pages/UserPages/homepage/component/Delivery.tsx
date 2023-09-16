@@ -1,7 +1,7 @@
-import TruckIcon from '../../../assets/icons/Truck';
-import HeadPhone from '../../../assets/icons/HeadPhone';
-import Money from '../../../assets/icons/Money';
-import Load from '../../../assets/icons/Load';
+import TruckIcon from '../../../../assets/icons/Truck';
+import HeadPhone from '../../../../assets/icons/HeadPhone';
+import Money from '../../../../assets/icons/Money';
+import Load from '../../../../assets/icons/Load';
 const Delivery = () => {
    return (
       <div className='delivery'>

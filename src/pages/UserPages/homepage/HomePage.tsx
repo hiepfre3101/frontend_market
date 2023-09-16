@@ -1,0 +1,45 @@
+import { Helmet } from 'react-helmet';
+import Banner from './component/Banner';
+import SubBanner from './component/SubBanner';
+import Card from './component/Card';
+import { useEffect, useState } from 'react';
+import BtnFilter from './component/BtnFilter';
+import Delivery from './component/Delivery';
+import Decorated from './component/Decorated';
+import { useGetAllProductQuery } from '../../../services/products.service';
+const HomePage = () => {
+   const { data, isLoading } = useGetAllProductQuery();
+   const [item, setItems] = useState(data?.body?.docs || []);
+   useEffect(() => {
+      if (data?.body && !isLoading) setItems(data?.body?.docs);
+   }, [data, isLoading]);
+   const btnFilter = [...new Set(data?.body?.docs.map((val: any) => val.categoryId.cateName))];
+   console.log(btnFilter);
+
+   const filterItems = (cate: any) => {
+      const newItems = data?.body?.docs.filter((data: any) => data.categoryId.cateName === cate);
+      setItems(newItems);
+   };
+   console.log(item);
+   const refetch = () => {
+      setItems(data?.body?.docs);
+   };
+   return (
+      <div>
+         <Helmet>
+            <title>Trang chủ</title>
+         </Helmet>
+         <Banner />
+         <Delivery />
+         <SubBanner />
+         <div className='text pb-12'>
+            <h2 className='text text-center font-bold  text-[32px] '>Sản phẩm nổi bật</h2>
+         </div>
+         <BtnFilter btnFilter={btnFilter} filterItems={filterItems} refetch={refetch} />
+         <Card item={item} />
+         <Decorated />
+      </div>
+   );
+};
+
+export default HomePage;
