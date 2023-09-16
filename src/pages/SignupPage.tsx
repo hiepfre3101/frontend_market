@@ -2,10 +2,11 @@ import { Button, Form, Input, message } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useSingupMutation } from '../../services/auth.service';
-import { saveTokenAndUser } from '../../slices/authSlice';
+import { useSingupMutation } from '../services/auth.service';
+import { saveTokenAndUser } from '../slices/authSlice';
 import { GoogleOutlined } from '@ant-design/icons';
 import { RuleObject } from 'antd/es/form';
+import React from 'react';
 
 export interface ErrorResponse {
    data: {
