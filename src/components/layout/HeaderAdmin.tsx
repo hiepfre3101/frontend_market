@@ -25,7 +25,6 @@ const items: MenuProps['items'] = [
 ];
 const HeaderAdmin = () => {
    const [triggerDrop, setTriggerDrop] = useState(false);
-   console.log(triggerDrop);
    return (
       <Header
          style={{
