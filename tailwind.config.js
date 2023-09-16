@@ -4,7 +4,9 @@ export default {
    theme: {
       extend: {
          colors: {
-            greenPrimary: '#80b235'
+            greenPrimary: '#80b235',
+            greenPri600: '#5c8918',
+            greenPri200: '#80b23552'
          }
       }
    },
