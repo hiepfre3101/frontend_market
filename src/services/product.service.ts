@@ -27,7 +27,10 @@ const productApi = createApi({
             };
          }
       }),
-      getAllExpand: builder.query<IResponseHasPaginate<IProductExpanded>, Partial<IQueryParam> & Pick<IQueryParam, 'expand'>>({
+      getAllExpand: builder.query<
+         IResponseHasPaginate<IProductExpanded>,
+         Partial<IQueryParam> & Pick<IQueryParam, 'expand'>
+      >({
          query: (params) => {
             return {
                url: '/products',
