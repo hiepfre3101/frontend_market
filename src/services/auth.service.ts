@@ -20,7 +20,7 @@ const authApi = createApi({
          },
          invalidatesTags: ['auth']
       }),
-      singup: builder.mutation<DataAuthResponse, AuthSignupInput>({
+      signup: builder.mutation<DataAuthResponse, AuthSignupInput>({
          query: (info) => {
             return {
                url: '/signup',
@@ -47,5 +47,5 @@ const authApi = createApi({
    })
 });
 
-export const { useLoginMutation, useSingupMutation, useGetTokenQuery, useClearTokenMutation } = authApi;
+export const { useLoginMutation, useSignupMutation, useGetTokenQuery, useClearTokenMutation } = authApi;
 export default authApi;
