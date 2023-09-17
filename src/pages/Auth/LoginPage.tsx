@@ -6,11 +6,8 @@ import { useDispatch } from 'react-redux';
 import { useLoginMutation } from '../../services/auth.service';
 import { saveTokenAndUser } from '../../slices/authSlice';
 import { GoogleOutlined } from '@ant-design/icons';
+import { AuthLoginInput } from '../../interfaces/auth';
 
-export interface AuthLoginInput {
-    email: string;
-    password: string;
-}
 
 const LoginPage = () => {
    const navigate = useNavigate();
