@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal, Input, Button, Space, Spin, Image } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { useSearchProductMutation } from '../../../../services/productsSearch.service';
@@ -8,24 +8,33 @@ const SearchFilter = ({ children }: any) => {
    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
    const [searchValue, setSearchValue] = useState<string>('');
    const [search, { data, isLoading }] = useSearchProductMutation();
+   const [items, setItems] = useState<IProduct[]>();
+   useEffect(() => {
+      if (!isLoading && data?.body) {
+         setItems(data?.body?.docs);
+      }
+   }, [data, isLoading]);
    const showModal = () => {
       setIsModalOpen(true);
    };
    const handleCancel = () => {
+      setItems([]);
+      setSearchValue('');
       setIsModalOpen(false);
    };
    const handleSearch = () => {
+      if (searchValue === '') return setItems([]);
       search(`&_q=${searchValue}`);
    };
    return (
       <>
          <span onClick={showModal}>{children}</span>
 
-         <Modal onCancel={handleCancel} title='Basic Modal' open={isModalOpen} footer={(_, {}) => <></>}>
+         <Modal onCancel={handleCancel} title='Search Products' open={isModalOpen} footer={(_, {}) => <></>}>
             <Space>
                <Input
                   onChange={(e) => setSearchValue(e.target.value)}
-                  placeholder='Basic usage'
+                  placeholder='.....'
                   className='w-[420px] border-2'
                />
                <Button onClick={() => handleSearch()} type='primary' icon={<SearchOutlined />}></Button>
@@ -35,7 +44,7 @@ const SearchFilter = ({ children }: any) => {
                   <Spin />
                </div>
             ) : (
-               data?.body?.docs.map((item: IProduct, index: number) => (
+               items?.map((item: IProduct, index: number) => (
                   <Link to={'/products'} key={index}>
                      <Space>
                         <Image src={item.images[0].url} width={120} />

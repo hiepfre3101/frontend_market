@@ -3,8 +3,8 @@ import { CiHeart, CiShoppingBasket } from 'react-icons/ci';
 const Card = ({ item }: any) => {
    return (
       <section className='grid grid-cols-3 px-40 gap-10 bg-gray-50 '>
-         {item?.map((data: any) => (
-            <div className='bg-white shadow-md  h-max relative'>
+         {item?.map((data: any, index: number) => (
+            <div key={index} className='bg-white shadow-md  h-max relative'>
                <a href=''>
                   <img
                      className=' object-cover hover:scale-105 duration-300 py-14 px-5'

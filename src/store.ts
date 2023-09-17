@@ -2,12 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './services/auth.service';
 import categoryReducer from './services/cate.service';
 import productReducer from './services/product.service';
-
+import userReducer from './slices/authSlice';
 export const store = configureStore({
    reducer: {
       [authReducer.reducerPath]: authReducer.reducer,
       [categoryReducer.reducerPath]: categoryReducer.reducer,
-      [productReducer.reducerPath]: productReducer.reducer
+      [productReducer.reducerPath]: productReducer.reducer,
+      userReducer: userReducer
    },
    middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat([authReducer.middleware, categoryReducer.middleware, productReducer.middleware])

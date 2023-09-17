@@ -1,3 +1,4 @@
+import { IResponseHasPaginate } from '../interfaces/base';
 import { IProduct } from './../interfaces/product';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
@@ -9,7 +10,7 @@ const product = createApi({
    }),
    tagTypes: ['products'],
    endpoints: (builder) => ({
-      searchProduct: builder.mutation<{ body: IProduct[] }, string>({
+      searchProduct: builder.mutation<IResponseHasPaginate<IProduct>, string>({
          query: (option) => ({
             url: '/products?_expand' + option,
             method: 'GET',

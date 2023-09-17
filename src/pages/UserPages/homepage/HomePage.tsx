@@ -8,9 +8,10 @@ import Delivery from './component/Delivery';
 import Decorated from './component/Decorated';
 import { useGetAllExpandQuery } from '../../../services/product.service';
 import BannerSale from './component/BannerSale';
+import { IProduct } from '../../../interfaces/product';
 const HomePage = () => {
    const { data, isLoading } = useGetAllExpandQuery({ expand: true });
-   const [item, setItems] = useState(data?.body?.docs || []);
+   const [item, setItems] = useState<IProduct[] | undefined>(data?.body?.docs || []);
    useEffect(() => {
       if (data?.body && !isLoading) setItems(data?.body?.docs);
    }, [data, isLoading]);
@@ -22,7 +23,7 @@ const HomePage = () => {
    const refetch = () => {
       setItems(data?.body?.docs);
    };
-   console.log(item);
+   // console.log(item);
 
    return (
       <div>

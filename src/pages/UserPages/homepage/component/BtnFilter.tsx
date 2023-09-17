@@ -2,8 +2,9 @@ const BtnFilter = ({ btnFilter, filterItems, refetch }: any) => {
    return (
       <div className='flex justify-center mb-10'>
          <div>
-            {btnFilter.map((data: any) => (
+            {btnFilter.map((data: any, index: number) => (
                <button
+                  key={index}
                   className='btn  text-[#6AAD12] p-1 px-2 mx-5 text-lg font-bold'
                   onClick={() => filterItems(data)}
                >
