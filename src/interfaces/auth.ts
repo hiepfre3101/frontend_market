@@ -1,3 +1,4 @@
+import { message } from 'antd';
 export interface ErrorResponse {
    data: {
       message: string;
@@ -39,7 +40,11 @@ export interface IUser {
 }
 
 export interface TokenResponse {
-    accessToken: string;
-    expries: number;
-    data: IUser
+    body: {
+        accessToken: string;
+        expries: number;
+        data: IUser
+    },
+    message: string;
+    status: number;
 }

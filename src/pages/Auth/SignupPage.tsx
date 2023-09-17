@@ -2,7 +2,7 @@ import { Button, Form, Input, message } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useSingupMutation } from '../../services/auth.service';
+import { useSignupMutation } from '../../services/auth.service';
 import { saveTokenAndUser } from '../../slices/authSlice';
 import { GoogleOutlined } from '@ant-design/icons';
 import { RuleObject } from 'antd/es/form';
@@ -11,7 +11,7 @@ import { AuthSignupInput } from '../../interfaces/auth';
 const SignupPage = () => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
-   const [signup, { data, isLoading, error }] = useSingupMutation();
+   const [signup, { data, isLoading, error }] = useSignupMutation();
 
    useEffect(() => {
       console.log(error);
