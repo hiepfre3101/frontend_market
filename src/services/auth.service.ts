@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { AuthSignupInput, DataAuthResponse } from '../pages/Auth/SignupPage';
-import { AuthLoginInput } from '../pages/Auth/LoginPage';
+import { AuthSignupInput, DataAuthResponse, TokenResponse } from '../interfaces/auth';
+import { AuthLoginInput } from '../interfaces/auth';
 
 const authApi = createApi({
    reducerPath: 'authApi',
@@ -20,7 +20,7 @@ const authApi = createApi({
          },
          invalidatesTags: ['auth']
       }),
-      singup: builder.mutation<DataAuthResponse, AuthSignupInput>({
+      signup: builder.mutation<DataAuthResponse, AuthSignupInput>({
          query: (info) => {
             return {
                url: '/signup',
@@ -30,14 +30,14 @@ const authApi = createApi({
          },
          invalidatesTags: ['auth']
       }),
-      getToken: builder.query({
+      getToken: builder.query<TokenResponse, void>({
          query: () => ({
             url: '/token',
             method: 'GET',
             credentials: 'include'
          })
       }),
-      clearToken: builder.mutation({
+      clearToken: builder.mutation<void, void>({
          query: () => ({
             url: '/token',
             method: 'DELETE',
@@ -47,5 +47,5 @@ const authApi = createApi({
    })
 });
 
-export const { useLoginMutation, useSingupMutation, useGetTokenQuery, useClearTokenMutation } = authApi;
+export const { useLoginMutation, useSignupMutation, useGetTokenQuery, useClearTokenMutation } = authApi;
 export default authApi;

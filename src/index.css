@@ -2,21 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-button[type='button'], [type='reset'], [type='submit'] {
-    background-color: #1677ff;
+button[type='button'],
+[type='reset'],
+[type='submit'] {
+   background-color: #1677ff;
 }
-.ant-input:focus{
-    border-color: white !important;
-    box-shadow: none;
+.ant-input:focus {
+   border-color: white !important;
+   box-shadow: none;
 }
-.round-up{
-transform: rotate(180deg);
-transition: 0.5s;
+.round-up {
+   transform: rotate(180deg);
+   transition: 0.5s;
 }
 .round-down {
-    transform: rotate(360deg);
-    transition: 0.5s;
+   transform: rotate(360deg);
+   transition: 0.5s;
 }
-.ant-table-row{
-    cursor: pointer;
+.ant-table-row {
+   cursor: pointer;
+}
+image {
+   margin: 0 !important;
 }

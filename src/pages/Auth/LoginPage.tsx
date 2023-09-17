@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet';
 import { Button, Form, Input, message } from 'antd';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -6,11 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useLoginMutation } from '../../services/auth.service';
 import { saveTokenAndUser } from '../../slices/authSlice';
 import { GoogleOutlined } from '@ant-design/icons';
-
-export interface AuthLoginInput {
-   email: string;
-   password: string;
-}
+import { AuthLoginInput } from '../../interfaces/auth';
 
 const LoginPage = () => {
    const navigate = useNavigate();
@@ -18,6 +15,7 @@ const LoginPage = () => {
    const [login, { data, isLoading, error }] = useLoginMutation();
 
    useEffect(() => {
+      console.log(error);
       if (error?.data?.message) {
          message.error(error?.data?.message);
       }
@@ -43,9 +41,12 @@ const LoginPage = () => {
       }
    };
    return (
-      <div style={{ width: '60%', margin: '0 auto' }}>
-         <h3 style={{ textAlign: 'center', marginTop: '30px' }}>Login</h3>
-         <div id='formLogin' style={{ width: '50%', margin: '0 auto' }}>
+      <div className='m-auto w-[300px] max-w-[97%]'>
+         <Helmet>
+            <title>Đăng nhập</title>
+         </Helmet>
+         <h3 style={{ textAlign: 'center', marginTop: '30px' }}>Đăng nhập</h3>
+         <div id='formLogin' className='m-auto'>
             <Form layout='vertical' initialValues={{ remember: true }} onFinish={onFinish}>
                <Form.Item
                   label='Email'
@@ -71,12 +72,12 @@ const LoginPage = () => {
                </Form.Item>
                <Form.Item style={{ textAlign: 'center' }}>
                   <Button type='primary' htmlType='submit'>
-                     Login
+                     Đăng nhập
                   </Button>
                   <p style={{ textAlign: 'center' }}>Or</p>
                   <Link to={'http://localhost:8000/api/auth/google/login'}>
                      <Button htmlType='button' type='primary' icon={<GoogleOutlined />}>
-                        Login with Google
+                        Đăng nhập với Google
                      </Button>
                   </Link>
                </Form.Item>
@@ -85,7 +86,7 @@ const LoginPage = () => {
                      Do not have an account?
                      <Link className='text-blue-400' to='/signup'>
                         {' '}
-                        Register here
+                        Đăng ký ngay
                      </Link>
                   </p>
                </Form.Item>
