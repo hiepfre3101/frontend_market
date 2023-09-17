@@ -6,40 +6,7 @@ import { useSingupMutation } from '../../services/auth.service';
 import { saveTokenAndUser } from '../../slices/authSlice';
 import { GoogleOutlined } from '@ant-design/icons';
 import { RuleObject } from 'antd/es/form';
-
-export interface ErrorResponse {
-   data: {
-      message: string;
-   };
-}
-
-export interface DataAuthResponse {
-   accessToken: string;
-   message: string;
-   data: IUser;
-}
-
-export interface AuthSignupInput {
-   email: string;
-   userName: string;
-   password: string;
-   avatar?: string;
-   confirmPassword: string;
-}
-
-export interface IUser {
-   userName: string;
-   email: string;
-   password: string;
-   phoneNumber?: string;
-   address?: string;
-   avatar?: string;
-   role: 'admin' | 'member';
-   carId?: string;
-   notification?: string[];
-   voucher: string[];
-   state: boolean;
-}
+import { AuthSignupInput } from '../../interfaces/auth';
 
 const SignupPage = () => {
    const navigate = useNavigate();
