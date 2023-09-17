@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { AuthSignupInput, DataAuthResponse } from '../pages/Auth/SignupPage';
-import { AuthLoginInput } from '../pages/Auth/LoginPage';
+import { AuthSignupInput, DataAuthResponse, TokenResponse } from '../interfaces/auth';
+import { AuthLoginInput } from '../interfaces/auth';
 
 const authApi = createApi({
    reducerPath: 'authApi',
@@ -30,14 +30,14 @@ const authApi = createApi({
          },
          invalidatesTags: ['auth']
       }),
-      getToken: builder.query({
+      getToken: builder.query<TokenResponse, void>({
          query: () => ({
             url: '/token',
             method: 'GET',
             credentials: 'include'
          })
       }),
-      clearToken: builder.mutation({
+      clearToken: builder.mutation<void, void>({
          query: () => ({
             url: '/token',
             method: 'DELETE',
