@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet';
 import { Button, Form, Input, message } from 'antd';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +8,6 @@ import { useLoginMutation } from '../../services/auth.service';
 import { saveTokenAndUser } from '../../slices/authSlice';
 import { GoogleOutlined } from '@ant-design/icons';
 import { AuthLoginInput } from '../../interfaces/auth';
-
 
 const LoginPage = () => {
    const navigate = useNavigate();
@@ -42,7 +42,10 @@ const LoginPage = () => {
    };
    return (
       <div className='m-auto w-[300px] max-w-[97%]'>
-         <h3 style={{ textAlign: 'center', marginTop: '30px' }}>Login</h3>
+         <Helmet>
+            <title>Đăng nhập</title>
+         </Helmet>
+         <h3 style={{ textAlign: 'center', marginTop: '30px' }}>Đăng nhập</h3>
          <div id='formLogin' className='m-auto'>
             <Form layout='vertical' initialValues={{ remember: true }} onFinish={onFinish}>
                <Form.Item
@@ -69,18 +72,22 @@ const LoginPage = () => {
                </Form.Item>
                <Form.Item style={{ textAlign: 'center' }}>
                   <Button type='primary' htmlType='submit'>
-                     Login
+                     Đăng nhập
                   </Button>
                   <p style={{ textAlign: 'center' }}>Or</p>
                   <Link to={'http://localhost:8000/api/auth/google/login'}>
                      <Button htmlType='button' type='primary' icon={<GoogleOutlined />}>
-                        Login with Google
+                        Đăng nhập với Google
                      </Button>
                   </Link>
                </Form.Item>
                <Form.Item style={{ textAlign: 'center' }}>
                   <p>
-                     Do not have an account?<Link className='text-blue-400' to='/signup'> Register here</Link>
+                     Do not have an account?
+                     <Link className='text-blue-400' to='/signup'>
+                        {' '}
+                        Đăng ký ngay
+                     </Link>
                   </p>
                </Form.Item>
             </Form>

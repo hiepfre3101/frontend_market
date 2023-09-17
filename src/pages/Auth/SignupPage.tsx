@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet';
 import { Button, Form, Input, message } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -47,7 +48,10 @@ const SignupPage = () => {
 
    return (
       <div className='m-auto w-[300px] max-w-[97%]'>
-         <h3 style={{ textAlign: 'center', marginTop: '30px' }}>Register</h3>
+         <Helmet>
+            <title>Đăng ký</title>
+         </Helmet>
+         <h3 style={{ textAlign: 'center', marginTop: '30px' }}>Đăng ký</h3>
          <div id='formLogin' className='m-auto'>
             <Form layout='vertical' initialValues={{ remember: true }} onFinish={onFinish}>
                <Form.Item
@@ -98,12 +102,12 @@ const SignupPage = () => {
                </Form.Item>
                <Form.Item style={{ textAlign: 'center' }}>
                   <Button type='primary' htmlType='submit'>
-                     Register
+                     Đăng ký
                   </Button>
                   <p style={{ textAlign: 'center' }}>Or</p>
                   <Link to={'http://localhost:8000/api/auth/google/login'}>
                      <Button htmlType='button' type='primary' icon={<GoogleOutlined />}>
-                        Login with Google
+                        Đăng nhập với Google
                      </Button>
                   </Link>
                </Form.Item>
@@ -112,7 +116,7 @@ const SignupPage = () => {
                      Do you already have an account?{' '}
                      <Link className='text-blue-400' to='/login'>
                         {' '}
-                        Login here
+                        Đăng nhập
                      </Link>
                   </p>
                </Form.Item>
