@@ -57,8 +57,8 @@ const Footer = () => {
                <Col span={4}>
                   <h1 className='text-[#6AAD12] text-xl pb-5 flex justify-start'>Hỗ trợ</h1>
                   <h4 className='pb-5 flex justify-start'>Điền email của bạn vào đây</h4>
-                  <input type='text' className='flex justify-start' placeholder='Nhập email' />
-                  <button className='bg-[#6AAD12] mt-3 w-20 items-center text-center h-7 text-white'>Send</button>
+                  <input type='text' className='flex justify-start rounded-xl  h-7' placeholder='Nhập email' />
+                  <button className='bg-[#6AAD12] mt-3 w-20  h-7 text-white rounded-xl'>Send</button>
                </Col>
             </Row>
             <div className='flex justify-between py-8 px-20'>

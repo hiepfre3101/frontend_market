@@ -6,24 +6,24 @@ import { useEffect, useState } from 'react';
 import BtnFilter from './component/BtnFilter';
 import Delivery from './component/Delivery';
 import Decorated from './component/Decorated';
-import { useGetAllProductQuery } from '../../../services/products.service';
+import { useGetAllExpandQuery } from '../../../services/product.service';
+import BannerSale from './component/BannerSale';
 const HomePage = () => {
-   const { data, isLoading } = useGetAllProductQuery();
+   const { data, isLoading } = useGetAllExpandQuery({ expand: true });
    const [item, setItems] = useState(data?.body?.docs || []);
    useEffect(() => {
       if (data?.body && !isLoading) setItems(data?.body?.docs);
    }, [data, isLoading]);
    const btnFilter = [...new Set(data?.body?.docs.map((val: any) => val.categoryId.cateName))];
-   console.log(btnFilter);
-
    const filterItems = (cate: any) => {
       const newItems = data?.body?.docs.filter((data: any) => data.categoryId.cateName === cate);
       setItems(newItems);
    };
-   console.log(item);
    const refetch = () => {
       setItems(data?.body?.docs);
    };
+   console.log(item);
+
    return (
       <div>
          <Helmet>
@@ -38,6 +38,7 @@ const HomePage = () => {
          <BtnFilter btnFilter={btnFilter} filterItems={filterItems} refetch={refetch} />
          <Card item={item} />
          <Decorated />
+         <BannerSale />
       </div>
    );
 };

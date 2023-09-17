@@ -1,6 +1,6 @@
 const Decorated = () => {
    return (
-      <div className='grid grid-cols-2 px-40  pt-10'>
+      <div className='grid grid-cols-2 px-40 pt-10 pb-10'>
          <div className='grid grid-cols-2'>
             <div className=''>
                <img src='http://mauweb.monamedia.net/cleverfood/wp-content/uploads/2019/05/banner29.jpg' alt='' />

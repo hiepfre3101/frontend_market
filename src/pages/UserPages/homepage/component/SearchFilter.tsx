@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { Modal, Input, Button, Space, Spin, Image } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import { useSearchProductMutation } from '../../../../services/products.service';
-import { IProduct } from '../../../../interface/products';
+import { useSearchProductMutation } from '../../../../services/productsSearch.service';
+import { IProduct } from '../../../../interfaces/product';
 import { Link } from 'react-router-dom';
-
 const SearchFilter = ({ children }: any) => {
    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
    const [searchValue, setSearchValue] = useState<string>('');
@@ -37,7 +36,7 @@ const SearchFilter = ({ children }: any) => {
                </div>
             ) : (
                data?.body?.docs.map((item: IProduct, index: number) => (
-                  <Link to={'/'} key={index}>
+                  <Link to={'/products'} key={index}>
                      <Space>
                         <Image src={item.images[0].url} width={120} />
                         <div className=''>

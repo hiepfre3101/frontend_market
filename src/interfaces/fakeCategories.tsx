@@ -1,4 +1,4 @@
-import { ISubCategories } from './subCategories';
+import { ISubCategories } from './fakeSubCategories';
 
 export interface ICategories {
    id: string;

@@ -1,13 +1,9 @@
 import { Link } from 'react-router-dom';
 import { Popover, Col, Row, Divider } from 'antd';
-import User from '../../assets/icons/User';
-import GlassIcon from '../../assets/icons/GlassIcon';
-import CartIcon from '../../assets/icons/CartIcon';
-import HeartIcon from '../../assets/icons/HeartIcon';
+import { CiUser, CiHeart, CiSearch, CiShoppingBasket } from 'react-icons/ci';
 import LeaftIcon from '../../assets/icons/LeaftIcon';
 import { useGetAllCateQuery } from '../../services/cate.service';
 import SearchFilter from '../../pages/UserPages/homepage/component/SearchFilter';
-
 const Header = () => {
    const { data, isLoading } = useGetAllCateQuery();
 
@@ -16,8 +12,22 @@ const Header = () => {
          <div className='header-top  flex justify-between items-center'>
             <div className='left'>
                <div className='w-20 flex justify-between items-center pb-3'>
-                  <User className='w-7 h-7' />
-                  <HeartIcon className='w-7 h-7' />
+                  <Popover
+                     placement='bottom'
+                     content={
+                        <>
+                           <Link to={'/signup'}>SignUp</Link>
+                           <br />
+                           <Link to={'/login'}>Login</Link>
+                        </>
+                     }
+                     trigger='click'
+                  >
+                     <span>
+                        <CiUser className='w-7 h-7' />
+                     </span>
+                  </Popover>
+                  <CiHeart className='w-7 h-7' />
                </div>
             </div>
             <div className='text-center'>
@@ -33,9 +43,9 @@ const Header = () => {
             </div>
             <div className='w-20 flex justify-between items-center pb-3'>
                <SearchFilter>
-                  <GlassIcon className='w-7 h-7' />
+                  <CiSearch className='w-7 h-7' />
                </SearchFilter>
-               <CartIcon className='w-7 h-7' />
+               <CiShoppingBasket className='w-7 h-7' />
             </div>
          </div>
 
