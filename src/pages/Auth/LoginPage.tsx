@@ -15,22 +15,19 @@ const LoginPage = () => {
    const [login, { data, isLoading, error }] = useLoginMutation();
 
    useEffect(() => {
-      console.log(error);
-      if (error?.data?.message) {
-         message.error(error?.data?.message);
+      if (error && 'data' in error) {
+         const data = error.data as { message: string }
+         if ('message' in data) message.error(data?.message);
       }
    }, [error]);
 
    useEffect(() => {
-      if (data?.message?.match('Form error:')) {
-         return alert(data.message);
-      }
       if (!isLoading && data) {
          dispatch(saveTokenAndUser({ token: data.accessToken, user: data.data }));
          if (data.data?.role == 'admin') return navigate('/admin');
          navigate('/');
       }
-   }, [data, isLoading]);
+   }, [data, dispatch, isLoading, navigate]);
 
    const onFinish = (values: AuthLoginInput) => {
       try {
