@@ -15,15 +15,18 @@ const SignupPage = () => {
    const [signup, { data, isLoading, error }] = useSignupMutation();
 
    useEffect(() => {
-      console.log(error);
-      if (error?.data?.message) {
-         message.error(error.data.message);
+      if (error && 'data' in error) {
+         const data = error.data as { message: string }
+         if ('message' in data) message.error(data?.message);
       }
+   }, [error]);
+   
+   useEffect(() => {
       if (!isLoading && data) {
          dispatch(saveTokenAndUser({ token: data.accessToken, user: data.data }));
          navigate('/');
       }
-   }, [data, isLoading, error]);
+   }, [data, isLoading, error, dispatch, navigate]);
 
    const onFinish = (values: AuthSignupInput) => {
       try {
