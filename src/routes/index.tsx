@@ -7,6 +7,7 @@ import SignupPage from '../pages/Auth/SignupPage';
 import AdminLayout from '../layouts/AdminLayout';
 import Dashboard from '../pages/AdminPages/Dashboard';
 import ProductAdmin from '../pages/AdminPages/Product/ProductAdmin';
+import AddProduct from '../pages/AdminPages/Product/AddProduct';
 
 const router = createBrowserRouter([
    {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
          {
             path: 'products',
             element: <ProductAdmin />
+         },
+         {
+            path: 'add-product',
+            element: <AddProduct />
          }
       ]
    }
