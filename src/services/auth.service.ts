@@ -35,7 +35,8 @@ const authApi = createApi({
             url: '/token',
             method: 'GET',
             credentials: 'include'
-         })
+         }),
+         providesTags: ['auth']
       }),
       clearToken: builder.mutation<void, void>({
          query: () => ({
