@@ -60,7 +60,7 @@ const AdminLayout = () => {
          </Sider>
          <Layout>
             <HeaderAdmin />
-            <Content className='min-h-screen overflow-auto'>
+            <Content className='min-h-screen overflow-auto flex justify-center w-full'>
                <Outlet />
             </Content>
          </Layout>

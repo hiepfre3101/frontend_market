@@ -8,7 +8,7 @@ const Card = ({ item }: any) => {
                <a href=''>
                   <img
                      className=' object-cover hover:scale-105 duration-300 py-14 px-5'
-                     src={data.images[0].url}
+                     src={data.images[0]}
                      alt=''
                   />
                   <CiHeart className='w-8 h-8 absolute top-3 right-3' />
