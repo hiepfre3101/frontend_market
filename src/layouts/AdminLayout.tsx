@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PieChartOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Layout, Menu, theme } from 'antd';
 import { Outlet } from 'react-router';
 import { logoUrl } from '../constants/imageUrl';
 import ProductIcon from '../components/Icons/ProductIcon';
@@ -61,11 +61,7 @@ const AdminLayout = () => {
          </Sider>
          <Layout>
             <HeaderAdmin />
-            <Content style={{ margin: '0 16px' }}>
-               <Breadcrumb style={{ margin: '16px 0' }}>
-                  <Breadcrumb.Item>User</Breadcrumb.Item>
-                  <Breadcrumb.Item>Bill</Breadcrumb.Item>
-               </Breadcrumb>
+            <Content className='min-h-screen overflow-auto flex justify-center w-full'>
                <Outlet />
             </Content>
          </Layout>

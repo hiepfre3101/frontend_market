@@ -33,7 +33,9 @@ const HeaderAdmin = () => {
             background: 'white',
             display: 'flex',
             justifyContent: 'space-between',
-            alignItems: 'center'
+            alignItems: 'center',
+            zIndex: '100',
+            boxShadow: ' 0 3px 4px -2px rgba(0, 0, 0, 0.123)',
          }}
       >
          <div className='w-[40%] flex justify-start items-center gap-2 rounded-lg border-[1px] border-[rgba(0,0,0,0.1)] px-3 py-2'>
