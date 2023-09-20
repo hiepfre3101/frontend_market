@@ -17,6 +17,12 @@ export interface IResponseHasPaginate<T> {
    status: number;
 }
 
+export interface IResponse<T> {
+   body: T | T[];
+   message: string;
+   status: number;
+}
+
 export interface IQueryParam {
    sort: string;
    order: 'asc' | 'desc';
