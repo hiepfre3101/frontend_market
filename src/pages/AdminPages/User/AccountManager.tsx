@@ -17,8 +17,8 @@ function AccountManager() {
          <Helmet>
             <title>Tài khoản</title>
          </Helmet>
-         <div className='w-full flex justify-center items-center min-h-screen flex-col'>
-            <div className='flex justify-between items-center w-[86%]'>
+         <div className='w-full flex justify-center items-center min-h-screen flex-col mt-10'>
+            <div className='flex justify-between items-center w-[90%]'>
                <h1 className='text-3xl font-semibold text-[rgba(0,0,0,0.7)]'>Tài khoản</h1>
                <Link to='/manage/accounts/add'>
                   <button className='bg-greenPrimary duration-100 hover:bg-greenPri600 text-white text-lg p-2 font-semibold rounded-lg flex justify-start items-center gap-2'>
@@ -27,7 +27,7 @@ function AccountManager() {
                   </button>
                </Link>
             </div>
-            <div className='w-[86%] h-[1000px] bg-white rounded-lg mt-5'>
+            <div className='w-[90%] h-[1000px] bg-white rounded-lg mt-5'>
                <header className='flex justify-between items-center px-5 py-5'>
                   <div className='flex justify-between items-center max-w-[40%] gap-2 rounded-[100px] border-[1px] border-[#80b235] p-2'>
                      <SearchOutlined style={{ fontSize: '1rem', color: '#80b235' }} />
