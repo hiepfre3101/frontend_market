@@ -15,7 +15,7 @@ const AddProduct = () => {
    };
    const handleSubmit = async (body: any) => {
       try {
-         const { data } = await uploadImages(files);
+         const { data: { data } } = await uploadImages(files);
          const imagesUploaded = data.map((image) => image.url);
          form.setFieldValue('images', imagesUploaded);
       } catch (error) {
