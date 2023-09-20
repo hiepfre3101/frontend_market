@@ -1,19 +1,40 @@
-import { Divider, Form } from 'antd';
+import { Form, Radio, Space } from 'antd';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { InputProduct } from '../../../interfaces/product';
 import UploadButton from '../../../components/UploadButton/UploadButton';
 import { useState } from 'react';
 import { uploadImages } from '../../../api/upload';
+import BlockForm from './BlockForm';
+
+const fakeCategory = [
+   {
+      name: 'Thuc pham tuoi song',
+      value: '1'
+   },
+   {
+      name: 'Thuc pham tuoi song',
+      value: '2'
+   },
+   {
+      name: 'Thuc pham tuoi song',
+      value: '3'
+   },
+   {
+      name: 'Thuc pham tuoi song',
+      value: '4'
+   }
+];
 
 const AddProduct = () => {
    const [files, setFiles] = useState<File[]>([]);
+   const [categoryId, setCategoryId] = useState<string>();
    const [form] = Form.useForm();
    const handleGetFiles = (files: File[]) => {
       form.setFieldValue('images', files);
       setFiles(files);
    };
-   const handleSubmit = async (body: any) => {
+   const handleSubmit = async (body: InputProduct) => {
       try {
          const { data } = await uploadImages(files);
          const imagesUploaded = data.map((image) => image.url);
@@ -50,23 +71,53 @@ const AddProduct = () => {
                   </Form.Item>
                </div>
             </div>
-            <div className='bg-white mt-10 rounded-lg p-5'>
-               <p className='text-[1.5rem] font-semibold'>Hình ảnh sản phẩm</p>
-               <Divider />
-               <Form.Item<InputProduct>
-                  name='images'
-                  hasFeedback
-                  rules={[{ required: true, message: 'Please choose images' }]}
-               >
-                  <UploadButton
-                     maxCount={3}
-                     multiple
-                     listStyle='picture-card'
-                     getListFiles={handleGetFiles}
+            <Space size={'large'} className='w-full !items-start mt-5'>
+               <Space direction='vertical' size={"middle"} className='min-w-[800px]'>
+                  <BlockForm  title='Hinh anh san pham'>
+                     <Form.Item<InputProduct>
+                        name='images'
+                        hasFeedback
+                        rules={[{ required: true, message: 'Hay chon anh' }]}
+                     >
+                        <UploadButton
+                           maxCount={3}
+                           multiple
+                           listStyle='picture-card'
+                           getListFiles={handleGetFiles}
+                           name='images'
+                        />
+                     </Form.Item>
+                  </BlockForm>
+                  <BlockForm title='Thong tin san pham'>
+                       <Space size={"middle"} direction='vertical'>
+                           <p className='text-xl font-thin tracking-wider'>Thong tin co ban</p>
+                           
+                       </Space>
+                  </BlockForm>
+               </Space>
+               <BlockForm title='Danh muc' className='min-w-[500px]'>
+                  <Form.Item<InputProduct>
                      name='images'
-                  />
-               </Form.Item>
-            </div>
+                     hasFeedback
+                     rules={[{ required: true, message: 'Hay chon danh muc' }]}
+                  >
+                     <Radio.Group
+                        onChange={(e) => {
+                           setCategoryId(e.target.value);
+                           form.setFieldValue('categoryId', e.target.value);
+                        }}
+                        value={categoryId}
+                        className='flex flex-col gap-2 items-start'
+                     >
+                        {fakeCategory.map((cate) => (
+                           <Radio name='categoryId' value={cate.value} className='!text-lg  '>
+                              {cate.name}
+                           </Radio>
+                        ))}
+                     </Radio.Group>
+                  </Form.Item>
+               </BlockForm>
+            </Space>
          </Form>
       </>
    );
