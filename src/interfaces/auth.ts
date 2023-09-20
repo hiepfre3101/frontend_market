@@ -25,20 +25,20 @@ export interface AuthLoginInput {
 }
 
 export interface IUser {
-   _id: string;
+   _id?: string;
    userName: string;
    email: string;
-   password: string;
+   password?: string;
    phoneNumber?: string;
    address?: string;
    avatar?: string;
    role?: 'admin' | 'member';
-   carId?: string;
+   cartId?: string;
    orders?: string[];
-   notification?: string[];
+   notifications?: string[];
    voucher?: string[];
    state?: boolean;
-   createAt: string;
+   createAt?: string;
 }
 
 export type InputUser = Omit<IUser, '_id' | 'createAt'>;

@@ -11,6 +11,7 @@ import AccountManager from '../pages/AdminPages/User/AccountManager';
 import AddAccount from '../pages/AdminPages/User/AddAccount';
 import EditAccount from '../pages/AdminPages/User/EditAccount';
 import AddProduct from '../pages/AdminPages/Product/AddProduct';
+import AccountDetail from '../pages/AdminPages/User/AccountDetail';
 
 const router = createBrowserRouter([
    {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
             element: <ProductAdmin />
          },
          {
+            path: 'add-product',
+            element: <AddProduct />
+         },
+         {
             path: 'accounts',
             element: <AccountManager />
          },
@@ -56,12 +61,8 @@ const router = createBrowserRouter([
             element: <AddAccount />
          },
          {
-            path: 'accounts/:id/edit',
-            element: <EditAccount />
-         },
-         {
-            path: 'add-product',
-            element: <AddProduct />
+            path: 'accounts/:id/view',
+            element: <AccountDetail />
          }
       ]
    }
