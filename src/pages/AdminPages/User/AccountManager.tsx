@@ -1,37 +1,29 @@
-import { SearchOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import Table from 'antd/es/table';
-import { useState } from 'react';
+import { PlusCircleOutlined, SearchOutlined } from '@ant-design/icons';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import { productData } from '../../../constants/configTableAntd';
-import { useGetAllExpandQuery } from '../../../services/product.service';
+import { useState } from 'react';
+import { Button, Table } from 'antd';
 import Column from 'antd/es/table/Column';
-import ActionTable from '../../../components/ActionTable/ActionTable';
+import PencilIcon from '../../../components/Icons/PencilIcon';
+import { useGetAllQuery } from '../../../services/user.service';
+import { userData } from '../../../constants/configTableAntd';
 
-const ProductAdmin = () => {
+function AccountManager() {
    const [valueSearch, setValueSearch] = useState<string>('');
-   const [confirmResult, setConfirmResult] = useState<boolean>(false);
-   const { data, isLoading } = useGetAllExpandQuery({ expand: true });
-   const products = data && productData(data);
-
-   const getConfirmResult = (result: boolean) => {
-      setConfirmResult(result);
-      return result;
-   };
-
-   
+   const {data, isLoading} = useGetAllQuery()
+   const users = data && userData(data)
    return (
       <>
          <Helmet>
-            <title>Sản phẩm</title>
+            <title>Tài khoản</title>
          </Helmet>
          <div className='w-full flex justify-center items-center min-h-screen flex-col'>
             <div className='flex justify-between items-center w-[86%]'>
-               <h1 className='text-3xl font-semibold text-[rgba(0,0,0,0.7)]'>Sản phẩm</h1>
-               <Link to='/manage/add-product'>
+               <h1 className='text-3xl font-semibold text-[rgba(0,0,0,0.7)]'>Tài khoản</h1>
+               <Link to='/manage/accounts/add'>
                   <button className='bg-greenPrimary duration-100 hover:bg-greenPri600 text-white text-lg p-2 font-semibold rounded-lg flex justify-start items-center gap-2'>
                      <PlusCircleOutlined style={{ color: 'white' }} />
-                     Sản phẩm mới
+                     Tài khoản mới
                   </button>
                </Link>
             </div>
@@ -44,7 +36,7 @@ const ProductAdmin = () => {
                         value={valueSearch}
                         onChange={(e) => setValueSearch(e.target.value)}
                         className='text-sm outline-none border-none flex-1'
-                        placeholder='Tìm kiếm sản phẩm'
+                        placeholder='Tìm kiếm tài khoản'
                      />
                      {valueSearch !== '' && (
                         <button
@@ -57,28 +49,34 @@ const ProductAdmin = () => {
                   </div>
                   <div className=''></div>
                </header>
-               <Table dataSource={products} pagination={{ pageSize: 50 }} scroll={{ y: 240 }} loading={isLoading}>
+               <Table dataSource={users} pagination={{ pageSize: 50 }} scroll={{ y: 240 }} loading={isLoading}>
                   <Column
-                     title='Ảnh sản phẩm'
-                     dataIndex='image'
-                     key='image'
+                     title='Ảnh đại diện'
+                     dataIndex='avatar'
+                     key='avatar'
                      fixed='left'
                      width={150}
-                     render={(image) => <img src={image} className='w-[3rem] h-[3rem]' />}
+                     render={(avatar) => <img src={avatar} className='w-[3rem] h-[3rem]' />}
                   />
-                  <Column title='Tên' dataIndex='productName' key='productName' width={150} />
-                  <Column title='Giá' dataIndex='price' key='price' width={150} />
-                  <Column title='Danh mục lớn' dataIndex='category' key='category' width={150} />
-                  <Column title='Danh mục nhỏ' dataIndex='subCategory' key='subCategory' width={150} />
-                  <Column title='Thương hiệu' dataIndex='brand' key='brand' width={150} />
-                  <Column title='Kho hàng' dataIndex='stock' key='stock' width={150} />
+                  <Column title='Tên' dataIndex='userName' key='userName' width={150} />
+                  <Column title='email' dataIndex='email' key='email' width={150} 
+                    render={(email) => <a href={'mailto:'+email}>{email}</a>}
+                  />
+                  <Column title='địa chị' dataIndex='address' key='address' width={150} />
+                  <Column title='điện thoại' dataIndex='phoneNumber' key='phoneNumber' width={150} 
+                    render={(phoneNumber) => <a target='_self' href={'tel:'+phoneNumber}>{phoneNumber}</a>}
+                  />
+                  <Column title='vai trò' dataIndex='role' key='role' width={150} />
+                  <Column title='trạng thái' dataIndex='state' key='state' width={150} 
+                    render={(state) => state ? <p>Hoạt động</p> : <p>Không hoạt động</p>}
+                  />
                   <Column
                      title='Chức năng '
                      key='_id'
                      width={150}
                      dataIndex={'_id'}
                      render={(id) => (
-                        <ActionTable linkToUpdate={`/manage/products/${id}`} getResultConfirm={getConfirmResult} />
+                        <Link to={'/manage/accounts/'+id+'/edit'}><Button style={{ color: 'white' }} icon={<PencilIcon width={'1em'} height={'1em'}/>}>Sửa</Button></Link>
                      )}
                   />
                </Table>
@@ -86,6 +84,6 @@ const ProductAdmin = () => {
          </div>
       </>
    );
-};
+}
 
-export default ProductAdmin;
+export default AccountManager;
