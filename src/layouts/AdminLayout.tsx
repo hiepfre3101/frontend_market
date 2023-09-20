@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PieChartOutlined, NotificationOutlined } from '@ant-design/icons';
+import { PieChartOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu, theme } from 'antd';
 import { Outlet } from 'react-router';
@@ -31,7 +31,8 @@ const items: MenuItem[] = [
    ]),
    getItem(<Link to='/manage/orders'>Đơn hàng</Link>, 'sub1', <OrderIcon />),
    getItem(<Link to='/manage/vouchers'>Mã khuyễn mãi</Link>, 'sub2', <TicketIcon />),
-   getItem(<Link to='/manage/notifications'>Thông báo người dùng</Link>, 'sub3', <NotificationOutlined />)
+   getItem(<Link to='/manage/accounts'>Tài khoản</Link>, 'sub3', <UserOutlined />),
+   getItem(<Link to='/manage/notifications'>Thông báo người dùng</Link>, 'sub4', <NotificationOutlined />)
 ];
 
 const AdminLayout = () => {

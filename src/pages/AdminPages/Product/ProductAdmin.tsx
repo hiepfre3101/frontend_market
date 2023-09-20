@@ -69,7 +69,8 @@ const ProductAdmin = () => {
                   </header>
                   <Table dataSource={products} pagination={{ pageSize: 50 }} scroll={{ y: 240 }} loading={isLoading}>
                      <Column
-                        title=''
+                        title='Ảnh sản phẩm'
+                        fixed='left'
                         dataIndex='image'
                         key='image'
                         width={150}

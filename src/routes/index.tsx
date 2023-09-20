@@ -7,6 +7,9 @@ import SignupPage from '../pages/Auth/SignupPage';
 import AdminLayout from '../layouts/AdminLayout';
 import Dashboard from '../pages/AdminPages/Dashboard';
 import ProductAdmin from '../pages/AdminPages/Product/ProductAdmin';
+import AccountManager from '../pages/AdminPages/User/AccountManager';
+import AddAccount from '../pages/AdminPages/User/AddAccount';
+import EditAccount from '../pages/AdminPages/User/EditAccount';
 import AddProduct from '../pages/AdminPages/Product/AddProduct';
 
 const router = createBrowserRouter([
@@ -43,6 +46,18 @@ const router = createBrowserRouter([
          {
             path: 'products',
             element: <ProductAdmin />
+         },
+         {
+            path: 'accounts',
+            element: <AccountManager />
+         },
+         {
+            path: 'accounts/add',
+            element: <AddAccount />
+         },
+         {
+            path: 'accounts/:id/edit',
+            element: <EditAccount />
          },
          {
             path: 'add-product',
