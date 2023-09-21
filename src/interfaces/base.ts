@@ -18,7 +18,7 @@ export interface IResponseHasPaginate<T> {
 }
 
 export interface IResponse<T> {
-   body: T | T[];
+   body: T;
    message: string;
    status: number;
 }

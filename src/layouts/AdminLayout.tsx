@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
-import { PieChartOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
+import {
+   PieChartOutlined,
+   NotificationOutlined,
+   UserOutlined,
+   MenuFoldOutlined,
+   MenuUnfoldOutlined
+} from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Layout, Menu, theme } from 'antd';
+import { Button, Layout, Menu, theme } from 'antd';
 import { Outlet } from 'react-router';
 import { logoUrl } from '../constants/imageUrl';
 import ProductIcon from '../components/Icons/ProductIcon';
@@ -37,6 +43,7 @@ const items: MenuItem[] = [
 
 const AdminLayout = () => {
    const [collapsed, setCollapsed] = useState(false);
+   const [open, setOpen] = useState(true);
    const ButtonTrigger = (
       <button className='bg-greenPrimary text-white w-full font-semibold'>{collapsed ? 'Hiện' : 'Ẩn'}</button>
    );
@@ -52,14 +59,26 @@ const AdminLayout = () => {
             collapsed={collapsed}
             onCollapse={(value) => setCollapsed(value)}
             style={{ background: colorBgContainer }}
+            className={
+               'fixed z-[9999] transition-all ' +
+               (open ? '-translate-x-0' : '-translate-x-full') +
+               ' md:-translate-x-0 h-screen'
+            }
             trigger={ButtonTrigger}
          >
             <div className='max-h-[150px] flex justify-center items-center'>
                <img src={logoUrl} alt='logo' className='object-cover' />
             </div>
             <Menu theme='light' defaultSelectedKeys={['1']} mode='inline' items={items} />
+            <Button
+               className='absolute right-[-40px] top-[70px] z-[999] md:hidden md:opacity-0 md:invisible'
+               onClick={() => setOpen((prev) => !prev)}
+               icon={open ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
+               style={{ color: 'white' }}
+            ></Button>
          </Sider>
-         <Layout>
+         {open ? <div className='fixed top-0 right-0 z-[99] w-screen h-full bg-[rgba(0,0,0,0.1)] md:hidden md:opacity-0 md:invisible'></div> : ''}
+         <Layout className={'transition-all '+ (!collapsed ? 'md:pl-[250px]' : 'md:pl-[80px]')}>
             <HeaderAdmin />
             <Content className='min-h-screen overflow-auto flex justify-center w-full'>
                <Outlet />
