@@ -16,9 +16,9 @@ const DefaultLayout = () => {
    }, [data]);
    return (
       <>
-         <Header />
+         {/* <Header /> */}
          <Outlet />
-         <Footer />
+         {/* <Footer /> */}
       </>
    );
 };
