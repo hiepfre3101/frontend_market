@@ -69,10 +69,10 @@ const Header = () => {
                   </Popover>
                </Col>
                <Col span={4} className='text-lg font-medium'>
-                  <Link to='/'>Giới thiệu</Link>
+                  <Link to='/about'>Giới thiệu</Link>
                </Col>
                <Col span={4} className='text-lg font-medium'>
-                  <Link to='/'>Liên hệ</Link>
+                  <Link to='/contact'>Liên hệ</Link>
                </Col>
             </Row>
          </div>

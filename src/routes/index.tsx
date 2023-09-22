@@ -7,6 +7,9 @@ import SignupPage from '../pages/Auth/SignupPage';
 import AdminLayout from '../layouts/AdminLayout';
 import Dashboard from '../pages/AdminPages/Dashboard';
 import ProductAdmin from '../pages/AdminPages/Product/ProductAdmin';
+import AboutPage from '../pages/UserPages/AboutPage';
+import ContactPage from '../pages/UserPages/ContactPage';
+import NotFoundPage from '../pages/NotFoundPage';
 
 const router = createBrowserRouter([
    {
@@ -28,8 +31,20 @@ const router = createBrowserRouter([
          {
             path: '/signup',
             element: <SignupPage />
-         }
+         },
+         {
+            path: '/about',
+            element: <AboutPage />
+         },
+         {
+            path: '/contact',
+            element: <ContactPage />
+         },
       ]
+   },
+   {
+      path: '*',
+      element: <NotFoundPage />
    },
    {
       path: '/manage',

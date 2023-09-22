@@ -7,7 +7,7 @@ const ProductPage = () => {
          <Helmet>
             <title>Sản phẩm</title>
          </Helmet>
-         ProductPage
+         ProductPage123
       </div>
    );
 };
