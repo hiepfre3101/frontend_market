@@ -16,7 +16,7 @@ const Decorated = () => {
          </div>
 
          <div className=''>
-            <div className='grid grid-cols-2 pb-8'>
+            <div className='grid grid-cols-2 lg:pb-8 pb-4'>
                <img src='http://mauweb.monamedia.net/cleverfood/wp-content/uploads/2019/05/banner31.jpg' alt='' />
                <img src='http://mauweb.monamedia.net/cleverfood/wp-content/uploads/2019/05/banner32.jpg' alt='' />
             </div>
