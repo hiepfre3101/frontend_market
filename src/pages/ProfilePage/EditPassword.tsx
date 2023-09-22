@@ -18,7 +18,7 @@ type FieldType = {
 const EditPassword = () => {
     return (
         <div>
-             <h1 className="text-5xl font-extrabold dark:text-white">Mật khẩu</h1>
+             
             <Form
             name="basic"
             labelCol={{ span: 8 }}

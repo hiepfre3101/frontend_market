@@ -1,49 +1,91 @@
-import Header from '../components/layout/Header';
-import { Link, Outlet } from 'react-router-dom';
-const ProfileLayout = () => {
-    return (
-        <>
+import React, { useState } from 'react';
+import { PieChartOutlined, NotificationOutlined } from '@ant-design/icons';
+import type { MenuProps } from 'antd';
+import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Outlet } from 'react-router';
+import ProductIcon from '../components/Icons/ProductIcon';
+import { Link } from 'react-router-dom';
+import TicketIcon from '../components/Icons/TicketIcon';
+import OrderIcon from '../components/Icons/OrderIcon';
 
+import { useGetTokenQuery } from '../services/auth.service';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { saveTokenAndUser } from '../slices/authSlice';
+import {  useSelector } from 'react-redux';
+import { IAuth } from '../slices/authSlice';
 
+const { Content, Sider } = Layout;
 
-            <aside id="separator-sidebar" className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-                <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-                    <ul className="space-y-2 font-medium">
-                        <li>
+type MenuItem = Required<MenuProps>['items'][number];
 
-                            <Link to='/account/profile'><span className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">Dashboard</span></Link>
-
-
-                        </li>
-                        <li>
-                            <Link to='/account/profile'><span className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">Hồ sơ</span></Link>
-                        </li>
-                        <li>
-                            <Link to='/account/address'><span className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">Địa chỉ</span></Link>
-                        </li>
-                        <li>
-                            <Link to='/account/password'><span className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">Mật khẩu</span></Link>
-                        </li>
-                        <li>
-                            <Link to='/account/purchase'><span className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">Đơn mua</span></Link>
-                        </li>
-                        <li>
-                            <Link to='/account/profile'><span className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">Kho vouchers</span></Link>
-                        </li>
-
-                    </ul>
-
-                </div>
-            </aside>
-
-            <div className="p-4 sm:ml-64">
-                <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-                    <Outlet />
-                </div>
-            </div>
-
-        </>
-    )
+function getItem(label: React.ReactNode, key: React.Key, icon?: React.ReactNode, children?: MenuItem[]): MenuItem {
+   return {
+      key,
+      icon,
+      children,
+      label
+   } as MenuItem;
 }
+
+const items: MenuItem[] = [
+   
+   getItem('Tài khoản của tôi', '2', <ProductIcon />, [
+      getItem(<Link to='/account/profile'>Hồ sơ</Link>, '3'),
+      getItem(<Link to='/account/address'>Địa chỉ</Link>, '4'),
+      getItem(<Link to='/account/password'>Mật khẩu</Link>, '5')
+   ]),
+   getItem(<Link to='/account/purchase'>Đơn hàng</Link>, 'sub1', <OrderIcon />),
+   getItem(<Link to='/account/profile'>Mã khuyễn mãi</Link>, 'sub2', <TicketIcon />),
+   getItem(<Link to='/account/profile'>Thông báo người dùng</Link>, 'sub3', <NotificationOutlined />)
+];
+
+const ProfileLayout = () => {
+    const auth = useSelector((state: { userReducer: IAuth }) => state.userReducer);
+ 
+    const { data } = useGetTokenQuery();
+    const dispatch = useDispatch();
+    useEffect(() => {
+       if (data?.body?.data && data?.body?.accessToken) {
+          dispatch(saveTokenAndUser({ accessToken: data?.body?.accessToken, user: data?.body?.data }));
+       }
+    }, [data]);
+   const [collapsed, setCollapsed] = useState(false);
+   const ButtonTrigger = (
+      <button className='bg-greenPrimary text-white w-full font-semibold'>{collapsed ? 'Hiện' : 'Ẩn'}</button>
+   );
+   const {
+      token: { colorBgContainer }
+   } = theme.useToken();
+
+   return (
+      <Layout style={{ minHeight: '100vh' }}>
+         <Sider
+            width={250}
+            collapsible
+            collapsed={collapsed}
+            onCollapse={(value) => setCollapsed(value)}
+            style={{ background: colorBgContainer }}
+            trigger={ButtonTrigger}
+         >
+            <div className='max-h-[150px] flex justify-center items-center mt-10'>
+            <img src={auth?.user?.avatar} className='w-50  aspect-square m-0 rounded-full cursor-pointer' />
+            </div>
+            <Menu theme='light' defaultSelectedKeys={['1']} mode='inline' items={items} />
+         </Sider>
+         <Layout>
+            
+            <Content style={{ margin: '0 16px' }}>
+               <Breadcrumb style={{ margin: '16px 0' }}>
+                  
+               </Breadcrumb>
+               <Outlet />
+            </Content>
+            
+         </Layout>
+      </Layout>
+   );
+};
+
 
 export default ProfileLayout

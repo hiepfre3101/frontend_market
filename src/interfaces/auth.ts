@@ -38,6 +38,9 @@ export interface IUser {
    voucher: string[];
    state: boolean;
 }
+export interface InputUser extends IUser{
+   _id: string
+}
 
 export interface TokenResponse {
     body: {

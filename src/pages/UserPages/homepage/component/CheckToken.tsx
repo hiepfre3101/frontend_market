@@ -7,12 +7,14 @@ import { useClearTokenMutation } from '../../../../services/auth.service';
 
 const CheckToken = () => {
    const auth = useSelector((state: { userReducer: IAuth }) => state.userReducer);
+   console.log(auth);
    const [clearToken] = useClearTokenMutation();
    const dispatch = useDispatch();
    const onHandleLogout = () => {
       dispatch(deleteTokenAndUser());
       clearToken();
    };
+   
    return (
       <div>
          {!auth?.accessToken ? (
@@ -38,7 +40,7 @@ const CheckToken = () => {
                   placement='bottom'
                   content={
                      <>
-                        <Link to={'/signup'}>Tài Khoản</Link>
+                        <Link to={'/account/profile'}>Tài Khoản</Link>
                         <br />
                         <button onClick={() => onHandleLogout()}>Đăng xuất</button>
                      </>
