@@ -41,13 +41,13 @@ const ProductAdmin = () => {
                </div>
                <div className='w-[90%] min-h-[100vh] bg-white rounded-lg mt-5'>
                   <header className='flex justify-start gap-4 items-center px-5 py-5'>
-                     <div className='flex justify-between items-center max-w-[40%] gap-2 rounded-[100px] border-[1px] border-[#80b235] p-2'>
+                     <div className='flex justify-between items-center max-w-[50%] gap-2 rounded-[100px] border-[1px] border-[#80b235] p-2'>
                         <SearchOutlined style={{ fontSize: '1rem', color: '#80b235' }} />
                         <input
                            type='text'
                            value={valueSearch}
                            onChange={(e) => setValueSearch(e.target.value)}
-                           className='text-sm outline-none border-none flex-1'
+                           className='text-sm outline-none border-none w-full flex-1'
                            placeholder='Tìm kiếm sản phẩm'
                         />
                         {valueSearch !== '' && (
@@ -69,7 +69,8 @@ const ProductAdmin = () => {
                   </header>
                   <Table dataSource={products} pagination={{ pageSize: 50 }} scroll={{ y: 240 }} loading={isLoading}>
                      <Column
-                        title=''
+                        title='Ảnh sản phẩm'
+                        fixed='left'
                         dataIndex='image'
                         key='image'
                         width={150}
