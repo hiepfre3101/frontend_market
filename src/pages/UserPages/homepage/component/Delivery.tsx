@@ -5,9 +5,9 @@ import Load from '../../../../assets/icons/Load';
 const Delivery = () => {
    return (
       <div className='delivery'>
-         <div className='grid grid-cols-4 mx-20 my-10 gap-8 place-content-center'>
+         <div className='lg:grid lg:grid-cols-4 grid grid-cols-2 lg:mx-20 lg:my-10 lg:gap-8 mx-20 my-10 gap-8 place-content-center'>
             <div className=' flex justify-center items-center shadow-md h-40'>
-               <TruckIcon width='70' height='50' />
+               <TruckIcon width='90' height='50' />
                <div className='delivery-text pl-5'>
                   <h2 className='text-center font-bold pr-10 text-slate-900'>Free delivery</h2>
                   <p>Orders over $99.00</p>
