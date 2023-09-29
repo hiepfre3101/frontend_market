@@ -1,19 +1,23 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useGetOneQuery, useUpdateUserMutation } from '../../../services/user.service';
 import { Helmet } from 'react-helmet';
 import { Button, Modal, Spin, Tabs, message } from 'antd';
-import { CameraOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined, CameraOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import type { TabsProps } from 'antd';
 import DraggerImage from '../../../components/UploadButton/DraggerImage';
 import { uploadImages } from '../../../api/upload';
 import { IUser } from '../../../interfaces/auth';
+import EditAccount from './EditAccount';
 
 const items: TabsProps['items'] = [
    {
       key: '1',
-      label: 'Thông tin tài khoản',
-      children: 'Thông tin'
+      label: 'Hoạt động tương tác',
+      children: <div className='bg-white rounded-md p-5'>
+         <h1>Tương tác gần đây</h1>
+
+      </div>
    },
    {
       key: '2',
@@ -35,7 +39,7 @@ function AccountDetail() {
    };
 
    const handleOk = async () => {
-      setConfirmLoading(true)
+      setConfirmLoading(true);
       const {
          data: { data: imageUrl }
       } = await uploadImages(files);
@@ -48,12 +52,13 @@ function AccountDetail() {
       updateAccount({
          id: id!,
          data: { ...dataRequest } as IUser
-      }).unwrap().then(() => {
-         message.success('Change avatar successfully')
-         setConfirmLoading(false);
-         setOpen(false)
-      });
-      
+      })
+         .unwrap()
+         .then(() => {
+            message.success('Change avatar successfully');
+            setConfirmLoading(false);
+            setOpen(false);
+         });
    };
 
    const onChange = (key: string) => {
@@ -73,12 +78,13 @@ function AccountDetail() {
                   <Spin />
                ) : (
                   <div>
-                     <h1 className='text-3xl my-3 font-semibold text-[rgba(0,0,0,0.7)]'>
+                     <h1 className='text-3xl my-3 flex items-center font-semibold text-[rgba(0,0,0,0.7)]'>
+                        <Link to={'/manage/accounts'}><Button icon={<ArrowLeftOutlined/>} className='bg-transparent border-transparent'></Button></Link>
                         {data?.body ? data?.body.userName : 'Người dùng'}
                      </h1>
-                     <header className='flex p-5 bg-white rounded-lg justify-between'>
+                     <header className='flex flex-col md:flex-row gap-4 p-5 bg-white rounded-lg justify-between'>
                         <div className='flex items-center gap-2'>
-                           <div className='w-[80px] h-[80px] rounded-full relative'>
+                           <div className='min-w-[80px] w-[80px] min-h-[80px] h-[80px] rounded-full relative'>
                               <img
                                  src={data?.body?.avatar}
                                  alt='user avatar'
@@ -91,21 +97,33 @@ function AccountDetail() {
                                  className='bg-white border-[1px] border-[rgba(0,0,0,0.5)] absolute -right-1 -bottom-1'
                                  icon={<CameraOutlined />}
                               ></Button>
-                              <Modal open={open} confirmLoading={confirmLoading} onOk={handleOk} onCancel={() => setOpen(false)}>
+                              <Modal
+                                 open={open}
+                                 confirmLoading={confirmLoading}
+                                 onOk={handleOk}
+                                 onCancel={() => setOpen(false)}
+                              >
                                  <DraggerImage maxCount={1} multiple name={'avatar'} onDataChange={handleDataChange} />
                               </Modal>
                            </div>
                            <div>
-                              <h1 className='font-bold text-[1.4rem]'>{data?.body.userName}</h1>
+                              <h1 className='font-bold text-[1.4rem] lg:w-[400px] break-words'>{data?.body.userName}</h1>
                               <p>{data?.body.email}</p>
                            </div>
                         </div>
-                        <div>
-                           <Button className='text-white'>Chỉnh sửa tài khoản</Button>
+                        <div className='self-end w-full md:w-auto'>
+                           <EditAccount id={id!}>
+                              <Button className='text-white w-full'>Chỉnh sửa tài khoản</Button>
+                           </EditAccount>
                         </div>
                      </header>
-                     <div>
-                        <Tabs defaultActiveKey='1' items={items} onChange={onChange} />
+                     <div className='flex justify-between gap-4'>
+                        <Tabs className='flex-1' defaultActiveKey='1' items={items} onChange={onChange} />
+                        <div className='pt-16'>
+                           <div className='bg-white p-5 w-[400px] rounded-md'>
+                              <h1>Hộp thư đến</h1>
+                           </div>
+                        </div>
                      </div>
                   </div>
                )}
