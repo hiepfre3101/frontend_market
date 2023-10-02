@@ -31,7 +31,7 @@ const Card = React.memo(({ product, link }: Props) => {
                   <div className='w-full rounded-lg  sm:h-72 lg:h-96 bg-white flex justify-center items-center'>
                      <img
                         alt='Art'
-                        src={product?.images[0].url}
+                        src={product?.images[0]}
                         className=' w-full object-cover scale-[1] aspect-auto '
                      />
                   </div>

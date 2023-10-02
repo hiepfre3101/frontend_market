@@ -1,4 +1,4 @@
-export const paramTransformer = <T>(raw: T) => {
+export const paramTransformer = (raw: Record<string, boolean | string | number | undefined>) => {
    if (typeof raw === 'object' && !Array.isArray(raw)) {
       let rawConverted = raw;
       for (const key in raw) {

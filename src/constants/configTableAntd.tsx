@@ -3,7 +3,7 @@ import { IResponseHasPaginate } from '../interfaces/base';
 import { IUser } from '../interfaces/auth';
 type DataType = {
    key: string;
-   _id: string;
+   _id?: string;
 }
 type ProductDataType = DataType & {
    image: string;
@@ -54,7 +54,7 @@ export const userData = (data: IResponseHasPaginate<IUser>): UserDataType[] => {
       role: user.role,
       state: user.state,
       order: user.orders,
-      notifications: user.notification,
+      notifications: user.notifications,
       vouchers: user.voucher,
    }));
 };
