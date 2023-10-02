@@ -6,7 +6,7 @@ import { IProduct } from '../../../../interfaces/product';
 import { Link } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 
-const SearchFilter = ({ children }: any) => {
+const SearchFilter = ({ children }: { children: React.ReactNode }) => {
    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
    const [searchValue, setSearchValue] = useState<string>('');
    const [search, { data, isLoading }] = useSearchProductMutation();
@@ -96,7 +96,7 @@ const SearchFilter = ({ children }: any) => {
                   items.map((item: IProduct, index: number) => (
                      <Link className='w-[30%] flex justify-center' to={'/products'} key={index}>
                         <div className='flex'>
-                           <Image src={item.images[0].url} width={120} />
+                           <Image src={item.images[0]} width={120} />
                            <div className='w-[50%]'>
                               <h2 className=' '>{item.productName}</h2>
                               <h1>{item.price}</h1>

@@ -28,9 +28,9 @@ const Quickview = (props: Props) => {
                   </button>
                </div>
                <div className='flex justify-start gap-4 pb-5'>
-                  <img src={props.product.images[0].url} className='w-[50%] aspect-square' />
+                  <img src={props.product.images[0]} className='w-[50%] aspect-square' />
                   <div className='flex-1 flex flex-col items-start pt-3 gap-3'>
-                     <p className='text-xl font-semibold text-colorText'>{props.product.name}</p>
+                     <p className='text-xl font-semibold text-colorText'>{props.product.productName}</p>
                      <p className='text-xl font-semibold text-greenCus'>
                         ${props.product.price - props.product.price * (props.product.discount / 100)}
                      </p>
