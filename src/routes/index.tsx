@@ -1,15 +1,13 @@
 import { createBrowserRouter } from 'react-router-dom';
 import HomePage from '../pages/UserPages/homepage/HomePage';
 import DefaultLayout from '../layouts/DefaultLayout';
-import ProductPage from '../pages/UserPages/ProductPage';
+import ProductPage from '../pages/UserPages/productpage/ProductPage';
 import LoginPage from '../pages/Auth/LoginPage';
 import SignupPage from '../pages/Auth/SignupPage';
 import AdminLayout from '../layouts/AdminLayout';
 import Dashboard from '../pages/AdminPages/Dashboard';
 import ProductAdmin from '../pages/AdminPages/Product/ProductAdmin';
 import AccountManager from '../pages/AdminPages/User/AccountManager';
-import AddAccount from '../pages/AdminPages/User/AddAccount';
-import EditAccount from '../pages/AdminPages/User/EditAccount';
 import AddProduct from '../pages/AdminPages/Product/AddProduct';
 import AccountDetail from '../pages/AdminPages/User/AccountDetail';
 
@@ -55,10 +53,6 @@ const router = createBrowserRouter([
          {
             path: 'accounts',
             element: <AccountManager />
-         },
-         {
-            path: 'accounts/add',
-            element: <AddAccount />
          },
          {
             path: 'accounts/:id/view',

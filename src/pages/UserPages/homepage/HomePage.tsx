@@ -37,7 +37,10 @@ const HomePage = () => {
             <h2 className='text text-center font-bold  text-[32px] '>Sản phẩm nổi bật</h2>
          </div>
          <BtnFilter btnFilter={btnFilter} filterItems={filterItems} refetch={refetch} />
-         <Card item={item} />
+         <div className='lg:grid lg:grid-cols-3 md:grid md:grid-cols-2 grid grid-cols-1 px-40 gap-10 bg-gray-50 '>
+            {item && item?.length > 0 ? item.map((prd, index) => <Card key={index} product={prd} link='/' />) : <></>}
+         </div>
+
          <Decorated />
          <BannerSale />
       </div>

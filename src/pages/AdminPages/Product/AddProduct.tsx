@@ -13,7 +13,7 @@ const AddProduct = () => {
       form.setFieldValue('images', files);
       setFiles(files);
    };
-   const handleSubmit = async (body: any) => {
+   const handleSubmit = async () => {
       try {
          const { data: { data } } = await uploadImages(files);
          const imagesUploaded = data.map((image) => image.url);
