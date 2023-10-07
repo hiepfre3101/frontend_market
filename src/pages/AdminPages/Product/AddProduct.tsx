@@ -1,11 +1,12 @@
-import { Form, Radio, Space } from 'antd';
+import { Form, Input, Radio, Space } from 'antd';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { InputProduct } from '../../../interfaces/product';
 import UploadButton from '../../../components/UploadButton/UploadButton';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { uploadImages } from '../../../api/upload';
 import BlockForm from './BlockForm';
+import TextArea from 'antd/es/input/TextArea';
 
 const fakeCategory = [
    {
@@ -29,6 +30,7 @@ const fakeCategory = [
 const AddProduct = () => {
    const [files, setFiles] = useState<File[]>([]);
    const [categoryId, setCategoryId] = useState<string>();
+   const [productName, setProductName] = useState<string>('');
    const [form] = Form.useForm();
    const handleGetFiles = (files: File[]) => {
       form.setFieldValue('images', files);
@@ -36,7 +38,9 @@ const AddProduct = () => {
    };
    const handleSubmit = async (body: InputProduct) => {
       try {
-         const { data: { data } } = await uploadImages(files);
+         const {
+            data: { data }
+         } = await uploadImages(files);
          const imagesUploaded = data.map((image) => image.url);
          form.setFieldValue('images', imagesUploaded);
       } catch (error) {
@@ -48,9 +52,11 @@ const AddProduct = () => {
          <Helmet>
             <title>Thêm sản phẩm</title>
          </Helmet>
-         <Form className='w-[80%] mt-20' form={form} onFinish={handleSubmit}>
+         <Form className='w-[80%] mt-20' form={form} onFinish={handleSubmit} layout='vertical'>
             <div className='flex justify-between items-center'>
                <input
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setProductName(e.target.value)}
+                  value={productName}
                   type='text'
                   placeholder='Sản phẩm không tên'
                   className='underline-offset-[11px] font-semibold text-[rgba(0,0,0,0.5)] text-[3rem] outline-none border-none bg-transparent decoration-greenPri600 hover:underline hover:decoration-dashed decoration-1 focus:underline focus:decoration-solid max-w-[50%]'
@@ -72,12 +78,12 @@ const AddProduct = () => {
                </div>
             </div>
             <Space size={'large'} className='w-full !items-start mt-5'>
-               <Space direction='vertical' size={"middle"} className='min-w-[800px]'>
-                  <BlockForm  title='Hinh anh san pham'>
+               <Space direction='vertical' size={'middle'} className='min-w-[800px]'>
+                  <BlockForm title='Hình ảnh sản phẩm'>
                      <Form.Item<InputProduct>
                         name='images'
                         hasFeedback
-                        rules={[{ required: true, message: 'Hay chon anh' }]}
+                        rules={[{ required: true, message: 'Vui lòng tải ảnh lên !' }]}
                      >
                         <UploadButton
                            maxCount={3}
@@ -88,14 +94,85 @@ const AddProduct = () => {
                         />
                      </Form.Item>
                   </BlockForm>
-                  <BlockForm title='Thong tin san pham'>
-                       <Space size={"middle"} direction='vertical'>
-                           <p className='text-xl font-thin tracking-wider'>Thong tin co ban</p>
-                           
-                       </Space>
+                  <BlockForm title='Thông tin sản phẩm'>
+                     <Space size={'middle'} direction='vertical' className='w-full'>
+                        <p className='text-xl font-thin tracking-wider'>Thông tin cơ bản</p>
+                        <Space direction='horizontal' className='w-full'>
+                           <Form.Item
+                              className='w-[500px]'
+                              name={'productName'}
+                              label={<p className='text-lg font-semibold'>Tên sản phẩm</p>}
+                              rules={[{ required: true, message: 'Vui lòng điền tên sản phẩm !' }]}
+                              hasFeedback
+                           >
+                              <Input
+                                 placeholder='Thêm tên sản phẩm'
+                                 className='w-full p-2'
+                                 value={productName}
+                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setProductName(e.target.value)}
+                              />
+                           </Form.Item>
+                           <Form.Item
+                              name={'amount'}
+                              label={<p className='text-lg font-semibold'>Số lượng</p>}
+                              rules={[{ required: true, message: 'Vui lòng điền số lượng sản phẩm!' }]}
+                              hasFeedback
+                           >
+                              <Input type='number' placeholder='Thêm số lượng sản phẩm' className='w-full p-2' />
+                           </Form.Item>
+                        </Space>
+                        <Form.Item label={<p className='text-lg font-semibold'>Mô tả</p>}>
+                           <TextArea rows={4} className='focus:border-[1px] focus:border-[#4096ff]' />
+                        </Form.Item>
+                     </Space>
+                  </BlockForm>
+                  <BlockForm title='Chính sách giá'>
+                     <Space direction='vertical' className='w-full'>
+                        <Form.Item
+                           name={'price'}
+                           label={<p className='text-lg font-semibold'>Giá</p>}
+                           rules={[{ required: true, message: 'Vui lòng điền giá sản phẩm!' }]}
+                           hasFeedback
+                        >
+                           <Input
+                              type='number'
+                              placeholder='Thêm giá sản phẩm'
+                              className='w-1/2 p-2'
+                              prefix={<span className='decoration-black underline absolute right-2 z-10'>đ</span>}
+                           />
+                        </Form.Item>
+                        <Space direction='horizontal' className='w-full' size={"large"}>
+                           <Form.Item
+                              name={'originPrice'}
+                              label={<p className='text-lg font-semibold'>Giá gốc</p>}
+                              rules={[{ required: true, message: 'Vui lòng điền giá gốc sản phẩm!' }]}
+                              hasFeedback
+                           >
+                              <Input
+                                 type='number'
+                                 placeholder='Thêm giá gốc sản phẩm'
+                                 className='w-full p-2'
+                                 prefix={<span className='decoration-black underline absolute right-2 z-10'>đ</span>}
+                              />
+                           </Form.Item>
+                           <Form.Item
+                              name={'profit'}
+                              label={<p className='text-lg font-semibold'>Lợi nhuận</p>}
+                              rules={[{ required: true, message: 'Vui lòng điền lợi nhuận sản phẩm!' }]}
+                              hasFeedback
+                           >
+                              <Input
+                                 type='number'
+                                 placeholder='Thêm giá lợi nhuận sản phẩm'
+                                 className='w-full p-2'
+                                 prefix={<span className='decoration-black underline absolute right-2 z-10'>đ</span>}
+                              />
+                           </Form.Item>
+                        </Space>
+                     </Space>
                   </BlockForm>
                </Space>
-               <BlockForm title='Danh muc' className='min-w-[500px]'>
+               <BlockForm title='Danh mục' className='min-w-[500px]'>
                   <Form.Item<InputProduct>
                      name='images'
                      hasFeedback

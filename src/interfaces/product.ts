@@ -25,7 +25,7 @@ export interface IProduct {
    createAt: string;
 }
 
-export type InputProduct = Omit<IProduct, '_id' | 'createAt'>;
+export type InputProduct = Omit<IProduct, '_id' | 'createAt'|'commentId'>;
 
 export interface IProductExpanded extends IProduct {
    categoryId: {
