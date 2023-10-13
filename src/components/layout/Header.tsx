@@ -35,7 +35,6 @@ const Header = () => {
                <CiShoppingBasket className='w-7 h-7' />
             </div>
          </div>
-
          <hr />
          <div className='header-bottom pt-4 pb-10  items-center text-center'>
             <Row justify='center'>
@@ -65,7 +64,7 @@ const Header = () => {
                         </div>
                      }
                   >
-                     <Link to='/products'>Menu</Link>
+                     <Link to='/products'>Danh mục</Link>
                   </Popover>
                </Col>
                <Col span={4} className='text-lg font-medium'>

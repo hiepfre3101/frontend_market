@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSignupMutation } from '../../services/auth.service';
 import { saveTokenAndUser } from '../../slices/authSlice';
-import { GoogleOutlined } from '@ant-design/icons';
+import { FacebookOutlined, GoogleOutlined } from '@ant-design/icons';
 import { RuleObject } from 'antd/es/form';
 import { AuthSignupInput } from '../../interfaces/auth';
 
@@ -15,15 +15,18 @@ const SignupPage = () => {
    const [signup, { data, isLoading, error }] = useSignupMutation();
 
    useEffect(() => {
-      console.log(error);
-      if (error?.data?.message) {
-         message.error(error.data.message);
+      if (error && 'data' in error) {
+         const data = error.data as { message: string };
+         if ('message' in data) message.error(data?.message);
       }
+   }, [error]);
+
+   useEffect(() => {
       if (!isLoading && data) {
          dispatch(saveTokenAndUser({ token: data.accessToken, user: data.data }));
          navigate('/');
       }
-   }, [data, isLoading, error]);
+   }, [data, isLoading, error, dispatch, navigate]);
 
    const onFinish = (values: AuthSignupInput) => {
       try {
@@ -101,15 +104,28 @@ const SignupPage = () => {
                   <Input.Password />
                </Form.Item>
                <Form.Item style={{ textAlign: 'center' }}>
-                  <Button type='primary' htmlType='submit'>
+                  <Button type='primary' className='w-full' size='large' htmlType='submit'>
                      Đăng ký
                   </Button>
                   <p style={{ textAlign: 'center' }}>Or</p>
-                  <Link to={'http://localhost:8000/api/auth/google/login'}>
-                     <Button htmlType='button' type='primary' icon={<GoogleOutlined />}>
-                        Đăng nhập với Google
-                     </Button>
-                  </Link>
+                  <div className='flex gap-1 items-center justify-between'>
+                     <Link className='w-full' to={'http://localhost:8000/api/auth/google/login'}>
+                        <Button size='large' className='w-full' htmlType='button' type='primary' icon={<GoogleOutlined />}>
+                           Google
+                        </Button>
+                     </Link>
+                     <Link className='w-full' to={'http://localhost:8000/api/auth/facebook/login'}>
+                        <Button
+                           className='w-full'
+                           size='large'
+                           htmlType='button'
+                           type='primary'
+                           icon={<FacebookOutlined />}
+                        >
+                           FaceBook
+                        </Button>
+                     </Link>
+                  </div>
                </Form.Item>
                <Form.Item style={{ textAlign: 'center' }}>
                   <p>

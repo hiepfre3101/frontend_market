@@ -5,8 +5,8 @@ const svg = () => (
    <svg
       xmlns='http://www.w3.org/2000/svg'
       version='1.0'
-      width='1.5em'
-      height='1.5em'
+      width='1em'
+      height='1em'
       viewBox='0 0 512.000000 512.000000'
       preserveAspectRatio='xMidYMid meet'
    >

@@ -1,4 +1,3 @@
-import { message } from 'antd';
 export interface ErrorResponse {
    data: {
       message: string;
@@ -26,21 +25,26 @@ export interface AuthLoginInput {
 }
 
 export interface IUser {
+   _id?: string;
    userName: string;
    email: string;
-   password: string;
+   password?: string;
    phoneNumber?: string;
    address?: string;
    avatar?: string;
-   role: 'admin' | 'member';
-   carId?: string;
-   notification?: string[];
-   voucher: string[];
-   state: boolean;
+   role?: 'admin' | 'member';
+   cartId?: string;
+   orders?: string[];
+   notifications?: string[];
+   voucher?: string[];
+   state?: boolean;
+   createAt?: string;
 }
 export interface InputUser extends IUser{
    _id: string
 }
+
+export type InputUser = Omit<IUser, '_id' | 'createAt'>;
 
 export interface TokenResponse {
     body: {

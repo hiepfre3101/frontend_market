@@ -7,11 +7,18 @@ import SignupPage from '../pages/Auth/SignupPage';
 import AdminLayout from '../layouts/AdminLayout';
 import Dashboard from '../pages/AdminPages/Dashboard';
 import ProductAdmin from '../pages/AdminPages/Product/ProductAdmin';
+
 import ProfileLayout from '../layouts/ProfileLayout';
 import EditProfile from '../pages/ProfilePage/EditProfile';
 import EditAddress from '../pages/ProfilePage/EditAddress';
 import EditPassword from '../pages/ProfilePage/EditPassword';
 import OrderPurchase from '../pages/ProfilePage/OrderPurchase ';
+
+import AccountManager from '../pages/AdminPages/User/AccountManager';
+
+import AddProduct from '../pages/AdminPages/Product/AddProduct';
+import AccountDetail from '../pages/AdminPages/User/AccountDetail';
+
 
 const router = createBrowserRouter([
    {
@@ -47,6 +54,19 @@ const router = createBrowserRouter([
          {
             path: 'products',
             element: <ProductAdmin />
+         },
+         {
+            path: 'add-product',
+            element: <AddProduct />
+         },
+         {
+            path: 'accounts',
+            element: <AccountManager />
+         },
+         
+         {
+            path: 'accounts/:id/view',
+            element: <AccountDetail />
          }
       ]
    },
