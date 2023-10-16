@@ -9,11 +9,14 @@ import { useGetAllQuery } from '../../../services/user.service';
 import { userData } from '../../../constants/configTableAntd';
 import EditAccount from './EditAccount';
 import AddAccount from './AddAccount';
+import { IUser } from '../../../interfaces/auth';
 
 function AccountManager() {
    const [valueSearch, setValueSearch] = useState<string>('');
-   const {data, isLoading} = useGetAllQuery()
-   const users = data && userData(data)
+   const { data, isLoading } = useGetAllQuery({
+      q: valueSearch
+   });
+   const users = data && userData(data);
    return (
       <>
          <Helmet>
@@ -29,7 +32,7 @@ function AccountManager() {
                   </button>
                </AddAccount>
             </div>
-            <div className='w-[90%] h-[1000px] bg-white rounded-lg mt-5'>
+            <div className='w-[90%] min-h-[100vh] bg-white rounded-lg mt-5'>
                <header className='flex justify-between items-center px-5 py-5'>
                   <div className='flex justify-between items-center max-w-[50%] gap-2 rounded-[100px] border-[1px] border-[#80b235] p-2'>
                      <SearchOutlined style={{ fontSize: '1rem', color: '#80b235' }} />
@@ -51,7 +54,7 @@ function AccountManager() {
                   </div>
                   <div className=''></div>
                </header>
-               <Table dataSource={users} pagination={{ pageSize: 50 }} scroll={{ y: 240 }} loading={isLoading}>
+               <Table dataSource={users} pagination={{ pageSize: 50 }} scroll={{ y: 400 }} loading={isLoading}>
                   <Column
                      title='Ảnh đại diện'
                      dataIndex='avatar'
@@ -60,17 +63,39 @@ function AccountManager() {
                      width={90}
                      render={(avatar) => <img src={avatar} className='w-[3rem] h-[3rem]' />}
                   />
-                  <Column title='Tên' dataIndex='userName' key='userName' width={150} />
-                  <Column title='email' dataIndex='email' key='email' width={300} 
-                    render={(email) => <a href={'mailto:'+email}>{email}</a>}
+                  <Column
+                     title='Tên'
+                     dataIndex='userName'
+                     key='userName'
+                     width={150}
+                     sorter={(a: IUser, b: IUser) => a.userName.length - b.userName.length}
+                  />
+                  <Column
+                     title='email'
+                     dataIndex='email'
+                     key='email'
+                     width={300}
+                     render={(email) => <a href={'mailto:' + email}>{email}</a>}
                   />
                   <Column title='địa chị' dataIndex='address' key='address' width={150} />
-                  <Column title='điện thoại' dataIndex='phoneNumber' key='phoneNumber' width={150} 
-                    render={(phoneNumber) => <a target='_self' href={'tel:'+phoneNumber}>{phoneNumber}</a>}
+                  <Column
+                     title='điện thoại'
+                     dataIndex='phoneNumber'
+                     key='phoneNumber'
+                     width={150}
+                     render={(phoneNumber) => (
+                        <a target='_self' href={'tel:' + phoneNumber}>
+                           {phoneNumber}
+                        </a>
+                     )}
                   />
                   <Column title='vai trò' dataIndex='role' key='role' width={150} />
-                  <Column title='trạng thái' dataIndex='state' key='state' width={150} 
-                    render={(state) => state ? <p>Hoạt động</p> : <p>Không hoạt động</p>}
+                  <Column
+                     title='trạng thái'
+                     dataIndex='state'
+                     key='state'
+                     width={150}
+                     render={(state) => (state ? <p>Hoạt động</p> : <p>Không hoạt động</p>)}
                   />
                   <Column
                      title='Chức năng '
@@ -79,11 +104,31 @@ function AccountManager() {
                      fixed='right'
                      dataIndex={'_id'}
                      render={(id) => (
-                        <Popover content={() => <>
-                           <EditAccount id={id}><Button style={{ color: 'white' }} icon={<PencilIcon width={'1em'} height={'1em'}/>}>Sửa</Button></EditAccount>
-                           <Link to={'/manage/accounts/'+id+'/view'}><Button style={{ color: 'white' }} icon={<EyeOutlined/>}>Xem</Button></Link>
-                        </>}>
-                           <Button shape='circle' className='bg-[white] border-[1px] border-[rgba(0,0,0,0.1)] hover:bg-[rgba(0,0,0,0.1)]' type='text' icon={<EllipsisOutlined/>}></Button>
+                        <Popover
+                           content={() => (
+                              <>
+                                 <EditAccount id={id}>
+                                    <Button
+                                       style={{ color: 'white' }}
+                                       icon={<PencilIcon width={'1em'} height={'1em'} />}
+                                    >
+                                       Sửa
+                                    </Button>
+                                 </EditAccount>
+                                 <Link to={'/manage/accounts/' + id + '/view'}>
+                                    <Button style={{ color: 'white' }} icon={<EyeOutlined />}>
+                                       Xem
+                                    </Button>
+                                 </Link>
+                              </>
+                           )}
+                        >
+                           <Button
+                              shape='circle'
+                              className='bg-[white] border-[1px] border-[rgba(0,0,0,0.1)] hover:bg-[rgba(0,0,0,0.1)]'
+                              type='text'
+                              icon={<EllipsisOutlined />}
+                           ></Button>
                         </Popover>
                      )}
                   />

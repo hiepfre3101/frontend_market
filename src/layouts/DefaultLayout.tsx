@@ -16,9 +16,11 @@ const DefaultLayout = () => {
    }, [data]);
    return (
       <>
-         {/* <Header /> */}
+         <Header />
+         <div className='max-lg:mt-[70px] lg:mt-[100px]'>
          <Outlet />
-         {/* <Footer /> */}
+         </div>
+         <Footer/>
       </>
    );
 };

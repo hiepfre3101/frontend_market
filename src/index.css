@@ -2,22 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+   margin:0;
+   padding:0;
+   box-sizing:border-box;
+}
+@font-face {
+   font-family: 'Quicksand';
+   src: url('./font/Quicksand-VariableFont_wght.ttf')
+}
+body{
+   font-family:Quicksand;
+   font-weight: 500;
+   color:#6f6f6f;
 
+}
 .ant-input:focus {
    border-color: white !important;
    box-shadow: none;
 }
+
 .round-up {
    transform: rotate(180deg);
    transition: 0.5s;
 }
+
 .round-down {
    transform: rotate(360deg);
    transition: 0.5s;
 }
+
 .ant-table-row {
    cursor: pointer;
 }
+
 image {
    margin: 0 !important;
+}
+
+.ant-layout-sider-children { 
+   overflow-x: visible;
+   overflow-y: auto;
+   overscroll-behavior-y: contain;
 }
